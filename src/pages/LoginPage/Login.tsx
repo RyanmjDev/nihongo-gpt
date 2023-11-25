@@ -17,7 +17,7 @@ const Login = () => {
             const user = await loginUser(credentials);
             navigate('/chat'); 
         } catch (error) {
-
+            console.log(error)
         }
     };
 
