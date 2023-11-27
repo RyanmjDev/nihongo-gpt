@@ -5,13 +5,13 @@ import ChatBubble from './components/ChatBubble/ChatBubble'
 import ChatInput from './components/ChatInput/ChatInput'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
       <div className='flex flex-col items-center'>
-        <ChatBubble/>
-     
+        <ChatBubble message={'Hello AI!'} isUser={true} />
+        <ChatBubble message={'As a machine language model I cannot blah blah'} isUser={false} />
+        <ChatBubble message={'Unfortunate :|!'} isUser={true} />
 
       </div>
       <ChatInput/>

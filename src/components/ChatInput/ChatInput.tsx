@@ -6,7 +6,7 @@ const ChatInput = () => {
     justify-between '>
         
         <input type="text"
-               className='bg-slate-400 w-full p-2 box-border rounded-lg'
+               className='bg-slate-700 text-white w-full p-2 box-border rounded-2xl'
         />
     </div>
   );

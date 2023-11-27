@@ -1,17 +1,23 @@
-import React from 'react'
+import React from 'react';
 
-const ChatBubble = () => {
-  return (
-    <>
-    <div className="bg-blue-500 text-white px-2 py-1 max-w-xs lg:max-w-md rounded-tl-xl rounded-tr-xl rounded-bl-xl mr-2">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga aspernatur maiores consequatur dignissimos. Suscipit dolor, corrupti quas voluptatibus iure animi ad sequi quasi in vero assumenda voluptatem, cupiditate eius minus!
-    </div>
-
-    <div className="bg-gray-700 text-white px-2 py-1 max-w-xs lg:max-w-md rounded-tl-xl rounded-tr-xl rounded-br-xl mr-2">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga aspernatur maiores consequatur dignissimos. Suscipit dolor, corrupti quas voluptatibus iure animi ad sequi quasi in vero assumenda voluptatem, cupiditate eius minus!
-    </div>
-    </>
-  )
+interface ChatBubbleProps {
+  message: string;
+  isUser: boolean;
 }
 
-export default ChatBubble
+const ChatBubble: React.FC<ChatBubbleProps> = ({ message, isUser }) => {
+  const userStyles = "bg-blue-500 ml-auto text-right rounded-bl-xl";
+  const aiStyles = "bg-gray-700 mr-auto text-left rounded-br-xl";
+
+  const bubbleStyles = `text-white text-xl px-2 py-1 max-w-xs lg:max-w-md rounded-tl-xl rounded-tr-xl mb-2 ${
+    isUser ? userStyles : aiStyles
+  }`;
+
+  return (
+    <div className={bubbleStyles} >
+      {message}
+    </div>
+  );
+};
+
+export default ChatBubble;
