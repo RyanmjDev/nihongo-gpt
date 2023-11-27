@@ -1,11 +1,9 @@
 import React from 'react';
+import { ChatMessage } from '../../types/types';
 
-interface ChatBubbleProps {
-  message: string;
-  isUser: boolean;
-}
 
-const ChatBubble: React.FC<ChatBubbleProps> = ({ message, isUser }) => {
+
+const ChatBubble: React.FC<ChatMessage> = ({ message, isUser }) => {
   const userStyles = "bg-blue-500 ml-auto text-right rounded-bl-xl";
   const aiStyles = "bg-gray-700 mr-auto text-left rounded-br-xl";
 

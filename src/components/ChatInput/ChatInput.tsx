@@ -2,7 +2,7 @@ import React from 'react';
 
 const ChatInput = () => {
   return (
-    <div className='fixed inset-x-0 bottom-3 mx-auto max-w-lg md:w-full h-8 border-t flex 
+    <div className='fixed inset-x-0 bottom-3 mx-auto max-w-lg md:w-full h-8 flex 
     justify-between '>
         
         <input type="text"
