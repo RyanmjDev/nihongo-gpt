@@ -1,6 +1,6 @@
 
 .chat-list {
-  max-height: 90vh; /* Adjust based on your layout */
+  max-height: 90vh; 
   overflow-y: auto;
   width: 100%;
   padding: 10px;

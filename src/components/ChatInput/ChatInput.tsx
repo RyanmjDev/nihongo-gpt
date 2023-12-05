@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux'
 import { addMessage, setBotTyping } from '../features/chat/chatSlice';
-
 import axios from 'axios';
+
+import { IoSend } from "react-icons/io5";
 
 const ChatInput = () => {
 const [input, setInput] = useState ('');
@@ -42,19 +43,20 @@ const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
   }
 };
 
-  return (
-    <div className='fixed inset-x-0 bottom-3 mx-auto max-w-lg md:w-full h-8 flex 
-    justify-between '>
-      
-        <input type="text"
-               className='bg-slate-700 text-white w-full p-2 box-border rounded-2xl'
-               value={input}
-               onChange={(e) => setInput(e.target.value)}
-               onKeyPress={handleKeyPress}
-               placeholder="Type a message..."
-        />
-    </div>
-  );
+return (
+  <div className='fixed inset-x-0 bottom-3 mx-auto max-w-lg md:w-full flex justify-between p-2 bg-slate-700 rounded-2xl'>
+    <input type="text"
+           className='bg-transparent text-white w-full focus:outline-none'
+           value={input}
+           onChange={(e) => setInput(e.target.value)}
+           onKeyPress={handleKeyPress}
+           placeholder="Type a message..."
+    />
+    <button onClick={handleSubmit} className="ml-2">
+    <IoSend />
+    </button>
+  </div>
+);
 }
 
 export default ChatInput;
