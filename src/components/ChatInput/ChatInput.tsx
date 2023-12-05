@@ -1,18 +1,20 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux'
-import { addMessage } from '../features/chat/chatSlice';
+import { addMessage, setBotTyping } from '../features/chat/chatSlice';
 
 import axios from 'axios';
 
 const ChatInput = () => {
-const [input, setInput] = useState ('')
+const [input, setInput] = useState ('');
 const dispatch = useDispatch();
 
 
 const sendMessage = async (userMessage: string) => {
   try {
-    const response = await axios.post('http://localhost:3000/chat', { message: userMessage });
-    dispatch(addMessage({message: response.data.message, isUser:false}));
+    dispatch(setBotTyping(true))
+      const response = await axios.post('http://localhost:3000/chat', { message: userMessage });
+      dispatch(addMessage({message: response.data.message, isUser:false}));
+    dispatch(setBotTyping(false))
     return response.data.message;
   } catch (error) {
     console.error("Error sending message:", error)

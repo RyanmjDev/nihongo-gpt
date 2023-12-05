@@ -13,6 +13,7 @@ const ChatBubble: React.FC<ChatMessage> = ({ message, isUser }) => {
 
   return (
     <div className={bubbleStyles} >
+      
       {message}
     </div>
   );
