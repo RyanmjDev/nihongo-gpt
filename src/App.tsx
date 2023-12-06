@@ -1,21 +1,16 @@
 import { useState } from 'react'
 
 import './App.css'
-import ChatInput from './components/ChatInput/ChatInput'
-import ChatList from './components/ChatList/ChatList'
+import ChatPage from './pages/ChatPage/ChatPage'
 import LoginPage from './pages/LoginPage/LoginPage'
 
 function App() {
 
   return (
     <>
-      {/* <div className='flex flex-col items-center'>
-        <ChatList/>
+       <ChatPage/> 
 
-      </div>
-      <ChatInput/> */}
-
-      <LoginPage/>
+      {/* <LoginPage/> */}
 
     </>
   )
