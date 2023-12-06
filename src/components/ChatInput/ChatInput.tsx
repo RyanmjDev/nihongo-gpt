@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux'
-import { addMessage, setBotTyping } from '../features/chat/chatSlice';
+import { addMessage, setBotTyping } from '../../features/chat/chatSlice';
 import axios from 'axios';
 
 import { IoSend } from "react-icons/io5";
@@ -37,11 +37,12 @@ try {
 }
 };
 
-const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
+const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
   if (event.key === 'Enter') {
     handleSubmit();
   }
 };
+
 
 return (
   <div className='fixed inset-x-0 bottom-3 mx-auto max-w-lg md:w-full flex justify-between p-2 bg-slate-700 rounded-2xl'>

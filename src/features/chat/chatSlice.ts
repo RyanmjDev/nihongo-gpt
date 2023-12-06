@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import { ChatMessage } from '../../../types/types'
+import { ChatMessage } from '../../types/types'
 
 
 interface ChatState {
