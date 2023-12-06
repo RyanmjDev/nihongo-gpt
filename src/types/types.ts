@@ -1,4 +1,5 @@
 export interface UserState {
+  token: string;
   name: string;
   email: string;
 }

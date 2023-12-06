@@ -4,6 +4,7 @@ import { UserState } from '../../types/types';
 
 
 const initialState: UserState = {
+  token: '',
   name: '',
   email: '',
 };
