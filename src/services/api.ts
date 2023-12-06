@@ -8,9 +8,8 @@ export const AUTH_TOKEN_COOKIE_NAME = 'authToken';
 
 
 export const checkLoggedIn = () => {
-    if (Cookies.get("token")) {
-      window.location.href = "/";
-    }
+    return Cookies.get(AUTH_TOKEN_COOKIE_NAME)
+
   }
 
 export const loginUser = async (credentials: LoginCredentials): Promise<UserState> => {

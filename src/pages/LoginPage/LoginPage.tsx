@@ -7,7 +7,9 @@ import { checkLoggedIn } from '../../services/api';
 const LoginPage = () => {
 
   useEffect(() => {
-    checkLoggedIn();
+    if(checkLoggedIn()) {
+      window.location.href = '/';
+    }
   }, []);
 
   return <Login />;
