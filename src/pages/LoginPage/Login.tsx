@@ -20,6 +20,12 @@ const Login = () => {
         console.log(response);
     };
 
+    const directToRegister = () => {
+        window.location.href = '/register';
+    }
+
+    
+
     return (
         <div className="flex justify-center items-center h-screen">
             <form className="bg-gray-900 shadow-md rounded-lg px-10 py-12 mb-4">
@@ -61,6 +67,7 @@ const Login = () => {
                         <button
                                 className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
                                 type="button"
+                                onClick={directToRegister}
                                 >
                                 Register
                         </button>
