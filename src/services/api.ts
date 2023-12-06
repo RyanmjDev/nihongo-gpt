@@ -1,16 +1,8 @@
 import axios from 'axios';
-
+import { LoginCredentials, User } from '../types/types';
 const API_BASE_URL = 'http://localhost:3000'; 
 
-interface LoginCredentials {
-    email: string;
-    password: string;
-}
 
-interface User {
-    id: string;
-    username: string;
-}
 
 export const loginUser = async (credentials: LoginCredentials): Promise<User> => {
     try {
