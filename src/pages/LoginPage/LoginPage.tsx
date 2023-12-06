@@ -1,10 +1,16 @@
-import React from 'react'
-import Login from './Login'
+import React, { useEffect } from 'react';
+
+import Cookies from 'js-cookie';
+import Login from './Login';
+import { checkLoggedIn } from '../../services/api';
 
 const LoginPage = () => {
-  return (
-    <Login/>
-    )
-}
 
-export default LoginPage
+  useEffect(() => {
+    checkLoggedIn();
+  }, []);
+
+  return <Login />;
+};
+
+export default LoginPage;

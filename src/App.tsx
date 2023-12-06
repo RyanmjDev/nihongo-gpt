@@ -8,9 +8,8 @@ function App() {
 
   return (
     <>
-       {/* <ChatPage/>  */}
+       <ChatPage/> 
 
-      <LoginPage/>
 
     </>
   )
