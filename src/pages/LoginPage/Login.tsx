@@ -13,9 +13,21 @@ const Login = () => {
         setPassword(e.target.value);
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-                
+
+        try {
+            const response = await axios.post('http://localhost:3000/login', {
+                email,
+                password
+            });
+
+            // Handle the response here
+            console.log(response.data);
+        } catch (error) {
+            // Handle the error here
+            console.error(error);
+        }
     };
 
     return (
@@ -52,6 +64,7 @@ const Login = () => {
                         <button
                                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full mb-2"
                                 type="submit"
+                                onClick={handleSubmit}
                         >
                                 Login In
                         </button>
