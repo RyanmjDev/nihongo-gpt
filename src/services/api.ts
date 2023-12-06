@@ -4,7 +4,7 @@ const API_BASE_URL = 'http://localhost:3000';
 
 
 
-export const loginUser = async (credentials: LoginCredentials): Promise<User> => {
+export const loginUser = async (credentials: LoginCredentials): Promise<UserState> => {
     try {
         const response = await axios.post<UserState>(`${API_BASE_URL}/login`, credentials);
         return response.data;
