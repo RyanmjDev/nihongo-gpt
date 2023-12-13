@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {useDispatch} from 'react-redux'
 import { addMessage, setBotTyping } from '../../features/chat/chatSlice';
 import axios from 'axios';
+import { AUTH_TOKEN_COOKIE_NAME } from '../../services/api';
+import Cookies from 'js-cookie';
 
 import { IoSend } from "react-icons/io5";
 
@@ -13,7 +15,14 @@ const dispatch = useDispatch();
 const sendMessage = async (userMessage: string) => {
   try {
     dispatch(setBotTyping(true))
-      const response = await axios.post('http://localhost:3000/chat', { message: userMessage });
+    const token = Cookies.get(AUTH_TOKEN_COOKIE_NAME); 
+    const response = await axios.post(
+      'http://localhost:3000/chat',
+        { message: userMessage },
+        { withCredentials: true, 
+          headers: {  'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json' } }
+      );
       dispatch(addMessage({message: response.data.message, isUser:false}));
     dispatch(setBotTyping(false))
     return response.data.message;
