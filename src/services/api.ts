@@ -14,7 +14,7 @@ export const checkLoggedIn = () => {
 
 export const loginUser = async (credentials: LoginCredentials): Promise<UserState> => {
     try {
-        const response = await axios.post<UserState>(`${API_BASE_URL}/login`, credentials);
+        const response = await axios.post<UserState>(`${API_BASE_URL}/users/login`, credentials);
         // Set the authentication token cookie
         Cookies.set(AUTH_TOKEN_COOKIE_NAME, response.data.token);
         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
