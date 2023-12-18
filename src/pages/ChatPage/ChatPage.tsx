@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import ChatList from '../../components/ChatList/ChatList'
 import ChatInput from '../../components/ChatInput/ChatInput'
-import { checkLoggedIn } from '../../services/api';
+import { checkLoggedIn } from '../../services/authService';
 
 
 const ChatPage = () => {

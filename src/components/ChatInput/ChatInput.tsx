@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import {useDispatch} from 'react-redux'
 import { addMessage, setBotTyping } from '../../features/chat/chatSlice';
 import axios from 'axios';
-import { AUTH_TOKEN_COOKIE_NAME } from '../../services/api';
 import Cookies from 'js-cookie';
+
+import { sendMessage } from '../../services/chatService';
 
 import { IoSend } from "react-icons/io5";
 
@@ -11,25 +12,18 @@ const ChatInput = () => {
 const [input, setInput] = useState ('');
 const dispatch = useDispatch();
 
-
-const sendMessage = async (userMessage: string) => {
+const submitMessage = async (userMessage: string): Promise<string | undefined> => {
   try {
-    dispatch(setBotTyping(true))
-    const token = Cookies.get(AUTH_TOKEN_COOKIE_NAME); 
-    const response = await axios.post(
-      'http://localhost:3000/chat',
-        { message: userMessage },
-        { withCredentials: true, 
-          headers: {  'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json' } }
-      );
-      dispatch(addMessage({message: response.data.message, isUser:false}));
-    dispatch(setBotTyping(false))
-    return response.data.message;
+      dispatch(setBotTyping(true));
+      const response = await sendMessage(userMessage);
+      dispatch(addMessage({ message: response.data.message, isUser: false }));
+      dispatch(setBotTyping(false));
+      return response.data.message;
   } catch (error) {
-    console.error("Error sending message:", error)
+      console.error("Error sending message:", error);
   }
 }
+
 
 const handleSubmit = () => {
 try {
@@ -37,7 +31,7 @@ try {
     if(input.trim())
     {
       dispatch(addMessage({message: input, isUser:true}));
-      sendMessage(input)
+      submitMessage(input)
       setInput('');
     }
 
