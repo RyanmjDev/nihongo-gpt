@@ -5,6 +5,8 @@ import ChatBubble from '../ChatBubble/ChatBubble';
 import TypingIndicator from './TypingIndicator';
 import { fetchChatMessages } from '../../services/chatService';
 import { addMessage } from '../../features/chat/chatSlice';
+
+import { ChatMessage } from '../../types/types'
 import './ChatList.css';
 
 const ChatList = () => {
@@ -22,7 +24,7 @@ const ChatList = () => {
     const loadChatHistory = async () => {
       try {
         const chatHistory = await fetchChatMessages();
-        chatHistory.forEach((message) => {
+        chatHistory.forEach((message: ChatMessage) => {
           dispatch(addMessage(message));
         });
       } catch (error) {
