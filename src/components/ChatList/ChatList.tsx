@@ -1,10 +1,10 @@
-
 import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../app/store';
 import ChatBubble from '../ChatBubble/ChatBubble';
 import TypingIndicator from './TypingIndicator';
 import { fetchChatMessages } from '../../services/chatService';
+import { addMessage } from '../../features/chat/chatSlice';
 import './ChatList.css';
 
 const ChatList = () => {
@@ -12,16 +12,28 @@ const ChatList = () => {
   const isBotTyping = useSelector((state: RootState) => state.chat.isBotTyping);
   const messagesEndRef = useRef(null);
 
+  const dispatch = useDispatch();
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // useEffect(() => {
-  //   const chatHistory = fetchChatMessages();
-  //   chatHistory.forEach((message) => {
-  //     dispatch(addMessage(message));
-  //   });
-  // }, []);
+  useEffect(() => {
+    const loadChatHistory = async () => {
+      try {
+        const chatHistory = await fetchChatMessages();
+        chatHistory.forEach((message) => {
+          dispatch(addMessage(message));
+        });
+      } catch (error) {
+        console.error('Error loading chat messages', error);
+      }
+    };
+
+    loadChatHistory();
+    scrollToBottom(); // Currently not working
+  }, [dispatch]);
+
 
   useEffect(() => {
     scrollToBottom();
