@@ -56,7 +56,7 @@ return (
            onKeyPress={handleKeyPress}
            placeholder="Type a message..."
     />
-    <button onClick={handleSubmit} className="ml-2">
+    <button onClick={handleSubmit} className="ml-2 text-white">
     <IoSend />
     </button>
   </div>
