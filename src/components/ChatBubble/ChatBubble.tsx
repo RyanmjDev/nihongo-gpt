@@ -1,5 +1,7 @@
 import React from 'react';
 import { ChatMessage } from '../../types/types';
+import SaveToNotes from './SaveToNotes';
+
 
 
 
@@ -12,11 +14,15 @@ const ChatBubble: React.FC<ChatMessage> = ({ message, isUser }) => {
   }`;
 
   return (
+    <>
     <div className={`flex ${isUser ? 'justify-end' : ''}`}>
       <div className={bubbleStyles} >
         {message}
       </div>
+    {!isUser && <SaveToNotes message={message}/> } 
     </div>
+
+   </>
   );
 };
 

@@ -8,6 +8,7 @@ import './index.css'
 import App from './App.tsx'
 import LoginPage from './pages/LoginPage/LoginPage.tsx';
 import RegisterPage from './pages/RegisterPage/RegisterPage.tsx';
+import NotesPage from './pages/NotesPage/NotesPage.tsx';
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -18,6 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/notes" element={<NotesPage/>} />
         <Route path="/" element={<App />}>
            {/* <Route path="/test" element={<test />} /> */}
         </Route>

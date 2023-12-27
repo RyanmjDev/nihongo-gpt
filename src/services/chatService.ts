@@ -26,3 +26,27 @@ export const fetchChatMessages = async (): Promise<any> => {
         throw error;
     }
 };
+
+
+export const saveToNotes = async (message: string) => {
+    try {
+        const res = await api.post(
+            '/chat/notes',
+            { message: message }
+        );
+        return res;
+    } catch (error) {
+        console.error('Error saving note', error);
+        throw error;
+    }
+}
+
+export const fetchNotes = async (): Promise<any> => {
+    try {
+        const response = await api.get('/chat/notes');
+        return response.data;
+    } catch (error) {
+        console.error('Error loading notes', error);
+        throw error;
+    }
+}

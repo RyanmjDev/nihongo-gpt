@@ -1,7 +1,7 @@
 const Links = [
      {
         path: '/',
-        label: 'Home',
+        label: 'Notes',
     },
     {
         path: '/about',
