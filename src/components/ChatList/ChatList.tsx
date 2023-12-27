@@ -1,57 +1,26 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../app/store';
+// ChatList.tsx
+
+import React, { useEffect, useRef } from 'react';
 import ChatBubble from '../ChatBubble/ChatBubble';
 import TypingIndicator from './TypingIndicator';
-import { fetchChatMessages } from '../../services/chatService';
-import { addMessage } from '../../features/chat/chatSlice';
-
 import { ChatMessage } from '../../types/types'
 import './ChatList.css';
 
+interface ChatListProps {
+  messages: ChatMessage[];
+  isLoading: boolean;
+  isBotTyping: boolean;
+}
 
-const ChatList = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const messages = useSelector((state: RootState) => state.chat.messages);
-  const isBotTyping = useSelector((state: RootState) => state.chat.isBotTyping);
+const ChatList: React.FC<ChatListProps> = ({ messages, isLoading, isBotTyping }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const dispatch = useDispatch();
-
-  // Load chat history on initial mount
-  useEffect(() => {
-    const loadChatHistory = async () => {
-      try {
-        const chatHistory = await fetchChatMessages();
-        chatHistory.forEach((message: ChatMessage) => {
-          dispatch(addMessage(message));
-        });
-      } catch (error) {
-        console.error('Error loading chat messages', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadChatHistory();
-  }, [dispatch]);
 
   // Scroll to bottom after messages have been updated
   useEffect(() => {
     if (!isLoading) {
-      messagesEndRef.current?.scrollIntoView({ behavior: 'auto' });
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [isLoading, messages.length]);
-
-  // Scroll to bottom smoothly for new messages after initial load
-  useEffect(() => {
-    if (!isLoading) {
-      const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-      };
-
-      scrollToBottom();
-    }
-  }, [messages]);
+  }, [isLoading, messages]);
 
   return (
     <div className='chat-list'>
@@ -71,4 +40,4 @@ const ChatList = () => {
   );
 };
 
-export default ChatList
+export default ChatList;

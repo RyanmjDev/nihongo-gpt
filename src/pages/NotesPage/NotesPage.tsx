@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import { fetchNotes } from '../../services/chatService'
+import ChatList from '../../components/ChatList/ChatList';
 
 const NotesPage = () => {
-    // const [isLoading, setIsLoading] = useState(true);
+     const [isLoading, setIsLoading] = useState(true);
     const [messages, setMessages] = useState([]);
 
 
@@ -12,6 +13,7 @@ const NotesPage = () => {
         const loadNotes = async () => {
             const notes = await fetchNotes();
             setMessages(notes);
+            setIsLoading(false);
         };
         
         loadNotes();
@@ -26,7 +28,9 @@ const NotesPage = () => {
 
 
   return (
-    <div>NotesPage</div>
+    <>
+    <ChatList messages={messages} isLoading={isLoading} isBotTyping={false} />
+    </>
   )
 }
 
