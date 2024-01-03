@@ -6,7 +6,7 @@ import { RootState } from '../../app/store';
 import ChatList from '../../components/ChatList/ChatList';
 import ChatInput from '../../components/ChatInput/ChatInput';
 import { fetchChatMessages } from '../../services/chatService';
-import { addMessage } from '../../features/chat/chatSlice';
+import { addMessage, clearMessages } from '../../features/chat/chatSlice';
 import { checkLoggedIn } from '../../services/authService';
 import '../../App.css';
 import { ChatMessage } from '../../types/types';
@@ -20,23 +20,32 @@ const ChatPage = () => {
   useEffect(() => {
     if (!checkLoggedIn()) {
       window.location.href = '/Login';
-    } else {
-      const loadChatHistory = async () => {
-        try {
-          const chatHistory = await fetchChatMessages();
-          chatHistory.forEach((message: ChatMessage) => {
-            dispatch(addMessage(message));
-          });
-        } catch (error) {
-          console.error('Error loading chat messages', error);
-        } finally {
-          setIsLoading(false);
-        }
-      };
-
-      loadChatHistory();
+      return; // Return here to prevent further execution if not logged in
     }
-  }, [dispatch]);
+
+    const loadChatHistory = async () => {
+      setIsLoading(true);
+      try {
+        const chatHistory = await fetchChatMessages();
+        dispatch(clearMessages()); // Clear previous messages before adding new ones
+        chatHistory.forEach((message: ChatMessage) => {
+          dispatch(addMessage(message));
+        });
+      } catch (error) {
+        console.error('Error loading chat messages', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadChatHistory();
+
+    // Cleanup function to clear messages when the component unmounts
+    return () => {
+      dispatch(clearMessages());
+    };
+
+  }, [dispatch]); 
 
   return (
     <>

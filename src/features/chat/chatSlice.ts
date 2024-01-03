@@ -23,6 +23,9 @@ export const chatSlice = createSlice ({
         addMessage: (state, action: PayloadAction<ChatMessage>) =>{
             state.messages.push(action.payload);
         },
+        clearMessages: (state) => {
+            state.messages = []; // Reset messages to an empty array
+          },
         setBotTyping: (state, action: PayloadAction<boolean>) => {
             state.isBotTyping = action.payload;
         }
@@ -31,5 +34,5 @@ export const chatSlice = createSlice ({
 });
 
 
-export const {addMessage, setBotTyping} = chatSlice.actions;
+export const {addMessage, clearMessages, setBotTyping} = chatSlice.actions;
 export default chatSlice.reducer;

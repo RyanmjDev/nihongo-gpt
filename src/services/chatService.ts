@@ -20,6 +20,7 @@ export const sendMessage = async (userMessage: string) => {
 export const fetchChatMessages = async (): Promise<any> => {
     try {
         const response = await api.get('/chat');
+        console.log(response.data);
         return response.data;
     } catch (error) {
         console.error('Error loading chat messages', error);
@@ -40,6 +41,18 @@ export const saveToNotes = async (message: string) => {
         throw error;
     }
 }
+
+export const removeFromNotes = async (noteId: string) => {
+    try {
+        const res = await api.delete(`/chat/notes/${noteId}`);
+        return res;
+    } catch (error) {
+        console.error('Error removing note', error);
+        throw error;
+    }
+}
+
+
 
 export const fetchNotes = async (): Promise<any> => {
     try {

@@ -13,5 +13,6 @@ export interface LoginCredentials {
 export interface ChatMessage {
     message: string;
     isUser: boolean;
+    messageId: string;
   }
   

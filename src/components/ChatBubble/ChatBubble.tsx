@@ -5,7 +5,7 @@ import SaveToNotes from './SaveToNotes';
 
 
 
-const ChatBubble: React.FC<ChatMessage> = ({ message, isUser }) => {
+const ChatBubble: React.FC<ChatMessage> = ({ message, messageId, isUser }) => {
   const userStyles = "bg-blue-500 text-right rounded-bl-xl";
   const aiStyles = "bg-gray-700 text-left rounded-br-xl";
 
@@ -20,7 +20,7 @@ const ChatBubble: React.FC<ChatMessage> = ({ message, isUser }) => {
         <div className={`${bubbleStyles} ${isUser ? 'mr-4' : 'ml-4'} max-w-xs lg:max-w-md`}>
           {message}
         </div>
-        {!isUser && <SaveToNotes message={message} />}
+        {!isUser && <SaveToNotes message={message} messageId={messageId}/>}
       </div>
     </>
   );

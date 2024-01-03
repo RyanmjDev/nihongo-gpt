@@ -29,7 +29,7 @@ const ChatList: React.FC<ChatListProps> = ({ messages, isLoading, isBotTyping })
       ) : (
         <>
           {messages.map((message, index) => (
-            <ChatBubble key={index} message={message.message} isUser={message.isUser} />
+            <ChatBubble key={index} message={message.message} messageId={message._id} isUser={message.isUser} />
           ))}
           <div ref={messagesEndRef} />
 
