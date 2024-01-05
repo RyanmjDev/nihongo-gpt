@@ -1,6 +1,6 @@
 const Links = [
      {
-        path: '/',
+        path: '/notes',
         label: 'Notes',
     },
     {
