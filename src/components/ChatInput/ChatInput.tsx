@@ -48,16 +48,16 @@ const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
 
 
 return (
-  <div className='fixed inset-x-0 bottom-3 mx-auto max-w-lg md:w-full flex justify-between p-2 bg-slate-700 rounded-2xl'>
+  <div className='flex justify-between m-2 mx-auto max-w-lg w-full p-2 bg-slate-700 rounded-2xl'>
     <input type="text"
-           className='bg-transparent text-white w-full focus:outline-none'
+           className='bg-transparent text-white flex-1 focus:outline-none px-2'
            value={input}
            onChange={(e) => setInput(e.target.value)}
            onKeyPress={handleKeyPress}
            placeholder="Type a message..."
     />
-    <button onClick={handleSubmit} className="ml-2 text-white">
-    <IoSend />
+    <button onClick={handleSubmit} className="shrink-0 ml-2 text-white">
+      <IoSend />
     </button>
   </div>
 );

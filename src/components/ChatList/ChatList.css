@@ -1,6 +1,8 @@
 
+
+
 .chat-list {
-  max-height: 90vh; 
+
   overflow-y: auto;
   width: 100%;
   padding: 10px;
@@ -29,7 +31,7 @@
 
 
 .typing-indicator {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     padding: 14px;
   }

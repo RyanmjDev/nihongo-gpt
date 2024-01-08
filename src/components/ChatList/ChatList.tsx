@@ -33,6 +33,8 @@ const ChatList: React.FC<ChatListProps> = ({ messages, isLoading, isBotTyping })
           ))}
           <div ref={messagesEndRef} />
 
+          
+
           {isBotTyping && <TypingIndicator />}
         </>
       )}

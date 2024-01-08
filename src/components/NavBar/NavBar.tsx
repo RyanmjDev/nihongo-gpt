@@ -17,25 +17,31 @@ const NavBar: React.FC = () => {
     };
 
     return (
-        <nav className=" bg-zinc-950" style={{ position: 'fixed', top: 0, left: 0, right: 0 }}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-12">
-                    <div className="flex items-center">
-                    <Logo/>
-                        <div className="hidden md:block">
-                         <NavLinks handleLogout={handleLogout}/>
-                        </div>
-                    </div>
-                    <div className="-mr-2 flex md:hidden">
-                       <MobileMenuToggle isOpen={isOpen} toggleMenu={toggleMenu}/>
-                    </div>
-                </div>
-            </div>
+  <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000 }}>
+  <div className="mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="flex items-center justify-between h-16">
 
-            {isOpen && (
-             <MobileMenu isOpen={isOpen} handleLogout={handleLogout}/>
-            )}
-        </nav>
+      <div className="flex items-center">
+        <Logo />
+      </div>
+
+
+      <div className="hidden md:flex items-center">
+        <NavLinks handleLogout={handleLogout} />
+      </div>
+
+      {/* Mobile menu button */}
+      <div className="-mr-2 flex md:hidden">
+        <MobileMenuToggle isOpen={isOpen} toggleMenu={toggleMenu} />
+      </div>
+    </div>
+  </div>
+
+  {/* Mobile menu */}
+  {isOpen && (
+    <MobileMenu isOpen={isOpen} handleLogout={handleLogout} />
+  )}
+</nav>
     );
 };
 
