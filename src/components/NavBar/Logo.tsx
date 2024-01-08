@@ -1,10 +1,10 @@
 import React from 'react'
-import { FcGraduationCap } from "react-icons/fc";
+import horizontonal from '../../assets/images/logo/horizontal.png'
 
 const Logo = () => (
     <div className="flex-shrink-0">
       {/* <img className="h-8 w-8" src="" alt="Logo" /> */}
-        <FcGraduationCap className="h-8 w-8"/>
+      <img className="h-8 w-auto" src={horizontonal} alt="Logo" />
     </div>
   );
   
