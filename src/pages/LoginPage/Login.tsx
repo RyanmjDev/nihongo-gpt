@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {loginUser} from '../../services/authService'
+import Logo from '../../components/common/Logo';
 
 
 const Login = () => {
@@ -27,8 +28,14 @@ const Login = () => {
     
 
     return (
-        <div className="flex justify-center items-center h-screen">
-            <form className="bg-gray-900 shadow-md rounded-lg px-10 py-12 mb-4">
+        <div className="flex justify-center items-center md:h-screen">
+
+            <form className="bg-zinc-800 shadow-md rounded-lg px-10 py-10 mb-4 w-full md:max-w-md">
+                
+                <div className="flex justify-center items-center mb-2">
+                    <Logo isVertical={true}/>
+                </div>
+
                 <div className="mb-6">
                     <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="email">
                         Email
@@ -62,7 +69,7 @@ const Login = () => {
                                 type="submit"
                                 onClick={handleSubmit}
                         >
-                                Login In
+                                Login
                         </button>
                         <button
                                 className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"

@@ -1,6 +1,6 @@
 import React from 'react';
 import { logoutUser } from '../../services/authService';
-import Logo from './Logo'
+import Logo from '../common/Logo'
 import NavLinks from './NavLinks';
 import MobileMenuToggle from './MobileMenuToggle';
 import MobileMenu from './MobileMenu';
