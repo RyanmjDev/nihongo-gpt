@@ -1,5 +1,3 @@
-// ChatList.tsx
-
 import React, { useEffect, useRef } from 'react';
 import ChatBubble from '../ChatBubble/ChatBubble';
 import TypingIndicator from './TypingIndicator';
