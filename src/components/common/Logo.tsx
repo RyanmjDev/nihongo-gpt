@@ -9,9 +9,9 @@ type LogoProps = {
 
 
 const Logo = ({ isVertical = false }: LogoProps) => (
-  <div className="flex-shrink-0">
+  <div >
     <img
-      className={`w-auto ${isVertical ? "h-20" : "h-8"}`}
+      className={`w-auto ${isVertical ? "h-20" : "h-6 md:h-8"}`}
       src={isVertical ? vertical : horizontonal}
       alt="Logo"
     />

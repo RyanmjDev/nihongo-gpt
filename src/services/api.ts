@@ -2,7 +2,8 @@ import axios, { AxiosInstance } from 'axios';
 import { AUTH_TOKEN_COOKIE_NAME } from './authService';
 import Cookies from "js-cookie";
 
-const API_BASE_URL = 'http://localhost:3000'; 
+// const API_BASE_URL = 'http://localhost:3000'; 
+const API_BASE_URL = 'http://192.168.0.149:3000';
 
 
 const api:AxiosInstance = axios.create({
