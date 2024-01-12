@@ -1,48 +1,56 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { logoutUser } from '../../services/authService';
 import Logo from '../common/Logo'
-import NavLinks from './NavLinks';
-import MobileMenuToggle from './MobileMenuToggle';
-import MobileMenu from './MobileMenu';
+import { IoSettingsOutline } from "react-icons/io5";
 
-const NavBar: React.FC = () => {
-    const [isOpen, setIsOpen] = React.useState(false);
 
-    const toggleMenu = () => {
-        setIsOpen(!isOpen);
-    };
 
-    const handleLogout = () => {
-       logoutUser();
-    };
+const Navbar = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-    return (
-  <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000 }}>
-  <div className="mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="flex items-center justify-between h-16 ">
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
 
-      <div className="flex items-center">
+  const handleLogout = () => {
+    logoutUser(); // Implement logout logic
+  };
+
+  const handleClearChat = () => {
+   // clearChat(); // Implement clear chat logic
+  };
+
+  return (
+    <nav className=" p-4 flex justify-between items-start lg:items-center">
+      <div className="flex item-start lg:items-center">
         <Logo />
       </div>
-
-
-      <div className="hidden md:flex items-center">
-        <NavLinks handleLogout={handleLogout} />
+      <div className="relative">
+        <button onClick={toggleDropdown} className="text-white focus:outline-none">
+          <IoSettingsOutline className="h-6 w-6" />
+        </button>
+        {isDropdownOpen && (
+          <div className="absolute right-0 mt-2 py-2 bg-black rounded-md shadow-xl z-20
+            w-80 lg:w-48 ">
+            <a
+              href="#"
+              className="block px-4 py-2  capitalize text-red-400 font-semibold hover:bg-slate-800 "
+              onClick={handleClearChat}
+            >
+            Clear Chat 
+            </a>
+            <a
+              href="#"
+              className="block px-4 py-2 text-sm capitalize text-white hover:bg-slate-800"
+              onClick={handleLogout}
+            >
+              Logout
+            </a>
+          </div>
+        )}
       </div>
-
-      {/* Mobile menu button */}
-      <div className="-mr-2 flex md:hidden">
-        <MobileMenuToggle isOpen={isOpen} toggleMenu={toggleMenu} />
-      </div>
-    </div>
-  </div>
-
-  {/* Mobile menu */}
-  {isOpen && (
-    <MobileMenu isOpen={isOpen} handleLogout={handleLogout} />
-  )}
-</nav>
-    );
+    </nav>
+  );
 };
 
-export default NavBar;
+export default Navbar;

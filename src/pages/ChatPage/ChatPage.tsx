@@ -8,6 +8,8 @@ import { addMessage, clearMessages } from '../../features/chat/chatSlice';
 import { checkLoggedIn } from '../../services/authService';
 import '../../App.css';
 import { ChatMessage } from '../../types/types';
+import NavBar  from '../../components/NavBar/NavBar';
+
 
 const ChatPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -48,11 +50,15 @@ const ChatPage = () => {
   return (
     <>
       {checkLoggedIn() && (
-    <div style={{ height: '90vh' }} className="flex justify-center items-center h-screen ">
-        <div style={{ height: '80vh' }} className='flex flex-col items-center justify-end w-full md:w-3/4 lg:w-1/2 lg:max-h-2xl max-w-7xl bg-zinc-800 rounded-lg shadow-xl'>
+      <div className="flex flex-col h-screen">
+      <NavBar />
+      <div className="flex flex-1 justify-center items-center overflow-hidden ">
+        <div className='flex flex-col items-center justify-end w-full md:w-3/4 lg:w-1/2 lg:max-h-2xl max-w-7xl bg-zinc-800 lg:rounded-lg shadow-xl
+          h-full lg:h-[80vh]  '>
             <ChatList messages={messages} isLoading={isLoading} isBotTyping={isBotTyping} />
             <ChatInput />
         </div>
+    </div>
     </div>
 
       )}
