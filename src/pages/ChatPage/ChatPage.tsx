@@ -52,7 +52,7 @@ const ChatPage = () => {
       {checkLoggedIn() && (
       <div className="flex flex-col h-screen">
       <NavBar />
-      <div className="flex flex-1 justify-center items-center overflow-hidden ">
+      <div className="flex flex-1 justify-center items-start overflow-hidden ">
         <div className='flex flex-col items-center justify-end w-full md:w-3/4 lg:w-1/2 lg:max-h-2xl max-w-7xl bg-zinc-800 lg:rounded-lg shadow-xl
           h-full lg:h-[80vh]  '>
             <ChatList messages={messages} isLoading={isLoading} isBotTyping={isBotTyping} />
