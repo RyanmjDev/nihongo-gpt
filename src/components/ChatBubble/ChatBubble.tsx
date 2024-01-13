@@ -1,6 +1,5 @@
 import React from 'react';
 import { ChatMessage } from '../../types/types';
-import SaveToNotes from './SaveToNotes';
 
 
 
@@ -20,7 +19,7 @@ const ChatBubble: React.FC<ChatMessage> = ({ message, messageId, isUser }) => {
         <div className={`${bubbleStyles} ${isUser ? 'mr-4' : 'ml-4'} max-w-xs lg:max-w-md`}>
           {message}
         </div>
-        {/* {!isUser && <SaveToNotes message={message} messageId={messageId}/>} */}
+  
       </div>
     </>
   );

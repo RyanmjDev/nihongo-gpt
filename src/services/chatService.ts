@@ -28,6 +28,17 @@ export const fetchChatMessages = async (): Promise<any> => {
     }
 };
 
+export const deleteAllChatMessages = async (): Promise<any> => {
+try {
+    const response = await api.delete('/chat');
+    console.log(response.data);
+    return response.data;
+} catch (error) {
+    console.error('Error deleting chat messages', error);
+    throw error;
+}
+};
+
 
 export const saveToNotes = async (message: string) => {
     try {

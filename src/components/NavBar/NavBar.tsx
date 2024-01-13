@@ -2,11 +2,15 @@ import React, {useState} from 'react';
 import { logoutUser } from '../../services/authService';
 import Logo from '../common/Logo'
 import { IoSettingsOutline } from "react-icons/io5";
+import ConfirmDeleteModal from '../Modals/DeleteChat/ConfirmDeleteModal';
+import { deleteAllChatMessages } from '../../services/chatService';
+
 
 
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -17,10 +21,21 @@ const Navbar = () => {
   };
 
   const handleClearChat = () => {
-   // clearChat(); // Implement clear chat logic
+    setIsDeleteModalOpen(true);
   };
 
+
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false); // Close the modal
+  };
+
+  const deleteChat = () => {
+    deleteAllChatMessages();
+  };
+
+
   return (
+    <>
     <nav className=" p-4 flex justify-between items-start lg:items-center">
       <div className="flex item-start lg:items-center">
         <Logo />
@@ -50,6 +65,12 @@ const Navbar = () => {
         )}
       </div>
     </nav>
+    <ConfirmDeleteModal 
+        isOpen={isDeleteModalOpen} 
+        onClose={closeDeleteModal} 
+        onDelete={deleteChat} 
+      />
+    </>
   );
 };
 

@@ -47,19 +47,19 @@ const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
 
 return (
   <div className='flex justify-between m-2 mx-auto max-w-lg w-11/12 lg:w-full p-2 bg-slate-700 rounded-full'>
-  <textarea
-  className='bg-transparent text-white flex-1 focus:outline-none px-2 resize-none  overflow-hidden'
-  value={input}
-  onChange={(e) => setInput(e.target.value)}
-  onKeyPress={handleKeyPress}
-  onInput={(e) => {
-    e.target.style.height = 'inherit';
-    e.target.style.height = `${e.target.scrollHeight}px`;
-  }}
-  placeholder="Type a message..."
-  maxLength={500}
-     rows={1}
-        style={{ minHeight: '2rem', maxHeight: '10rem' }}
+      <textarea
+      className='bg-transparent text-white flex-1 focus:outline-none px-2 resize-none  overflow-hidden'
+      value={input}
+      onChange={(e) => setInput(e.target.value)}
+      onKeyPress={handleKeyPress}
+      onInput={(e) => {
+        e.target.style.height = 'inherit';
+        e.target.style.height = `${e.target.scrollHeight}px`;
+      }}
+      placeholder="Type a message..."
+      maxLength={500}
+        rows={1}
+            style={{ minHeight: '2rem', maxHeight: '10rem' }}
 />
     <button onClick={handleSubmit} className="shrink-0 ml-2 text-white hover:text-blue-500 transition-colors duration-200">
       <IoSend />
