@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {loginUser} from '../../services/authService'
+import {loginUser, loginDemoUser} from '../../services/authService'
 import Logo from '../../components/common/Logo';
 import BtnDivider from './BtnDivider';
 
@@ -16,15 +16,16 @@ const Login = () => {
         setPassword(e.target.value);
     };
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
         const response = await loginUser({email, password});
         console.log(response);
     };
 
-    const handleDemo = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleDemo = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
-        // TODO: add logic for a demo user
+        const response = await loginDemoUser();
+        console.log(response);
     }
 
     const directToRegister = () => {
@@ -80,7 +81,7 @@ const Login = () => {
                                 type="button"
                                 onClick={handleDemo}
                         >
-                                Demo
+                               Try Demo
                         </button>
 
                         <BtnDivider />
@@ -98,6 +99,6 @@ const Login = () => {
         </div>
         </div>
     );
-    };    
+};    
 
 export default Login;
