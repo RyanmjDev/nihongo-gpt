@@ -4,7 +4,7 @@ import { RootState } from '../../app/store';
 import ChatList from '../../components/ChatList/ChatList';
 import ChatInput from '../../components/ChatInput/ChatInput';
 import { fetchChatMessages } from '../../services/chatService';
-import { addMessage, clearMessages } from '../../features/chat/chatSlice';
+import { loadPrevMessage, clearMessages } from '../../features/chat/chatSlice';
 import { checkLoggedIn } from '../../services/authService';
 import '../../App.css';
 import { ChatMessage } from '../../types/types';
@@ -29,7 +29,7 @@ const ChatPage = () => {
         const chatHistory = await fetchChatMessages();
         dispatch(clearMessages()); // Clear previous messages before adding new ones
         chatHistory.forEach((message: ChatMessage) => {
-          dispatch(addMessage(message));
+          dispatch(loadPrevMessage(message));
         });
       } catch (error) {
         console.error('Error loading chat messages', error);

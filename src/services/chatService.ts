@@ -17,9 +17,9 @@ export const sendMessage = async (userMessage: string) => {
     }
 }
 
-export const fetchChatMessages = async (): Promise<any> => {
+export const fetchChatMessages = async (skip = 0, limit = 5) => {
     try {
-        const response = await api.get('/chat');
+        const response = await api.get(`/chat/?skip=${skip}&limit=${limit}`);
         console.log(response.data);
         return response.data;
     } catch (error) {

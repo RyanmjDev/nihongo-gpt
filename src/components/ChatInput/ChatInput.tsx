@@ -53,8 +53,9 @@ return (
       onChange={(e) => setInput(e.target.value)}
       onKeyPress={handleKeyPress}
       onInput={(e) => {
-        e.target.style.height = 'inherit';
-        e.target.style.height = `${e.target.scrollHeight}px`;
+        const target = e.target as HTMLElement;
+        target.style.height = 'inherit';
+        target.style.height = `${target.scrollHeight}px`;
       }}
       placeholder="Type a message..."
       maxLength={500}
