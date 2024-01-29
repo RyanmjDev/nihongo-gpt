@@ -27,6 +27,7 @@ const ChatList: React.FC<ChatListProps> = ({ messages, isLoading, isBotTyping })
   }, [isLoading, messages]);
 
   useEffect(() => {
+    
     const currentList = listRef.current;
     if (currentList) {
       currentList.addEventListener('scroll', handleScroll);

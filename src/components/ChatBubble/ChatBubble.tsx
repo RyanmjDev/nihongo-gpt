@@ -9,7 +9,7 @@ const ChatBubble: React.FC<ChatMessage> = ({ message, messageId, isUser }) => {
   const aiStyles = "bg-gray-700 text-left rounded-br-xl";
 
   // Adjusted styles for padding and max-width
-  const bubbleStyles = `text-white text-lg px-4 py-2 rounded-tl-xl rounded-tr-xl mb-2 ${
+  const bubbleStyles = `text-white text-lg px-2 py-2 rounded-tl-xl rounded-tr-xl mb-2 ${
     isUser ? userStyles : aiStyles
   }`;
 
