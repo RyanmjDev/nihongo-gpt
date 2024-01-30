@@ -3,7 +3,7 @@ import { ChatMessage } from '../../types/types';
 
 
 
-
+// TODO: assign messageId to each message
 const ChatBubble: React.FC<ChatMessage> = ({ message, messageId, isUser }) => {
   const userStyles = "bg-blue-500 text-right rounded-bl-xl";
   const aiStyles = "bg-gray-700 text-left rounded-br-xl";

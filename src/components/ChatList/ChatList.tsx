@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import ChatBubble from '../ChatBubble/ChatBubble';
 import TypingIndicator from './TypingIndicator';
 import { useDispatch } from 'react-redux';
@@ -17,54 +17,68 @@ const ChatList: React.FC<ChatListProps> = ({ messages, isLoading, isBotTyping })
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [isLoadingPrev, setIsLoadingPrev] = useState(false); // State to track if loading previous messages
+  const messagesStartRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null); // Ref for the chat list container
+  const observer = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
     if (!isLoading && !isLoadingPrev) {
-      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      messagesEndRef.current?.scrollIntoView({ behavior: 'instant'});
     }
   }, [isLoading, messages]);
 
-  useEffect(() => {
-    
-    const currentList = listRef.current;
-    if (currentList) {
-      currentList.addEventListener('scroll', handleScroll);
+  const loadMoreMessages = useCallback(async () => {
+    if (isLoadingPrev) {
+      // If we are already loading, don't start loading more messages
+      return;
     }
-    return () => {
-      if (currentList) {
-        currentList.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, []);
-
-  const loadMoreMessages = async () => {
+    setIsLoadingPrev(true);
     try {
-      setIsLoadingPrev(true);
       const chatHistory = await fetchChatMessages(page);
-      chatHistory.forEach((message: ChatMessage) => {
-        dispatch(loadPrevMessage(message));
-      });
-      setPage(page + 1);
-      setIsLoadingPrev(false);
+      if (chatHistory.length > 0) {
+        chatHistory.forEach((message: ChatMessage) => {
+          dispatch(loadPrevMessage(message));
+        });
+        setPage(prevPage => prevPage + 1);
+      } else {
+        // If there are no more messages, we can disconnect the observer
+        if (observer.current) {
+          observer.current.disconnect();
+        }
+      }
     } catch (error) {
       console.error('Error loading chat messages', error);
-      setIsLoadingPrev(false);
     }
-  };
+    setIsLoadingPrev(false);
+  }, [dispatch, page, isLoadingPrev]);
+  
 
-  const handleScroll = () => {
-    const currentList = listRef.current;
-    if (currentList) {
-      // Check if the scroll position is near the top of the list
-      const isNearTop = currentList.scrollTop < 50; // 50px threshold
-
-      if (isNearTop && !isLoadingPrev) {
-        loadMoreMessages();
+  
+  useEffect(() => {
+    if (!messagesStartRef.current || isLoading || isLoadingPrev) {
+      return;
+    }
+  
+    observer.current = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          loadMoreMessages();
+        }
+      },
+      { threshold: 0.1 }
+    );
+  
+    observer.current.observe(messagesStartRef.current);
+  
+    return () => {
+      if (observer.current) {
+        observer.current.disconnect();
       }
-    }
-  };
+    };
+  }, [loadMoreMessages, isLoading, isLoadingPrev]);
+  
+  
 
   return (
     <div className='chat-list' ref={listRef}>
@@ -72,6 +86,7 @@ const ChatList: React.FC<ChatListProps> = ({ messages, isLoading, isBotTyping })
         <div>Loading...</div>
       ) : (
         <>
+        <div ref={messagesStartRef} />
           {messages.map((message, index) => (
             <ChatBubble key={index} message={message.message} messageId={message._id} isUser={message.isUser} />
           ))}
