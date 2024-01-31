@@ -5,6 +5,7 @@ import { ChatMessage } from '../../types/types'
 interface ChatState {
     messages: ChatMessage[],
     isBotTyping: boolean; 
+    
 }
 
 const initialState: ChatState = {

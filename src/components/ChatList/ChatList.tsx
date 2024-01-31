@@ -15,12 +15,15 @@ interface ChatListProps {
 
 const ChatList: React.FC<ChatListProps> = ({ messages, isLoading, isBotTyping }) => {
   const dispatch = useDispatch();
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(2);
   const [isLoadingPrev, setIsLoadingPrev] = useState(false); // State to track if loading previous messages
+  const [allMessagesLoaded, setAllMessagesLoaded] = useState(false); // State to track if all messages are loaded
   const messagesStartRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null); // Ref for the chat list container
   const observer = useRef<IntersectionObserver | null>(null);
+
+  
 
   useEffect(() => {
     if (!isLoading && !isLoadingPrev) {
@@ -29,12 +32,13 @@ const ChatList: React.FC<ChatListProps> = ({ messages, isLoading, isBotTyping })
   }, [isLoading, messages]);
 
   const loadMoreMessages = useCallback(async () => {
-    if (isLoadingPrev) {
+    if (isLoadingPrev || allMessagesLoaded) {
       // If we are already loading, don't start loading more messages
       return;
     }
     setIsLoadingPrev(true);
     try {
+      console.log("Load PREVIOUS chat history")
       const chatHistory = await fetchChatMessages(page);
       if (chatHistory.length > 0) {
         chatHistory.forEach((message: ChatMessage) => {
@@ -44,6 +48,7 @@ const ChatList: React.FC<ChatListProps> = ({ messages, isLoading, isBotTyping })
       } else {
         // If there are no more messages, we can disconnect the observer
         if (observer.current) {
+          setAllMessagesLoaded(true);
           observer.current.disconnect();
         }
       }
@@ -86,9 +91,10 @@ const ChatList: React.FC<ChatListProps> = ({ messages, isLoading, isBotTyping })
         <div>Loading...</div>
       ) : (
         <>
-        <div ref={messagesStartRef} />
           {messages.map((message, index) => (
-            <ChatBubble key={index} message={message.message} messageId={message._id} isUser={message.isUser} />
+        <div key={index} ref={index === 0 ? messagesStartRef : null}>
+        <ChatBubble message={message.message} messageId={message._id} isUser={message.isUser} />
+        </div>
           ))}
           <div ref={messagesEndRef} />
           {isBotTyping && <TypingIndicator />}
@@ -99,3 +105,4 @@ const ChatList: React.FC<ChatListProps> = ({ messages, isLoading, isBotTyping })
 };
 
 export default ChatList;
+

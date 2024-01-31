@@ -20,5 +20,7 @@ export interface ChatMessage {
     message: string;
     isUser: boolean;
     messageId: string;
+   ref?: React.RefObject<HTMLDivElement>;
+
   }
   

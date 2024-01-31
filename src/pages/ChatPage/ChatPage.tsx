@@ -17,15 +17,20 @@ const ChatPage = () => {
   const messages = useSelector((state: RootState) => state.chat.messages);
   const isBotTyping = useSelector((state: RootState) => state.chat.isBotTyping);
 
+
   useEffect(() => {
     if (!checkLoggedIn()) {
       window.location.href = '/Login';
       return; // Return here to prevent further execution if not logged in
     }
 
+  }, []); 
+
+  useEffect(() => {
     const loadChatHistory = async () => {
-      setIsLoading(true);
       try {
+        setIsLoading(true);
+        console.log("Load Initial Chat History")
         const chatHistory = await fetchChatMessages();
         dispatch(clearMessages()); // Clear previous messages before adding new ones
         chatHistory.forEach((message: ChatMessage) => {
@@ -45,7 +50,7 @@ const ChatPage = () => {
       dispatch(clearMessages());
     };
 
-  }, [dispatch]); 
+  }, []);
 
   return (
     <>
